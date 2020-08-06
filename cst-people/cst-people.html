@@ -19,7 +19,13 @@
       @apply (--layout-flex);
     }
     :iron-list {
+      @apply (--layout-fit);
+    }
+    .toolbar {
       @apply (--layout-flex);
+      @apply (--layout-horizontal);
+      @apply (--layout-center);
+      @apply (--layout-justified);
     }
     .person {
       @apply (--layout-vertical);
@@ -38,7 +44,7 @@
     }
   </style>
   <template>
-    <triplat-route name="peoplePage" path="/"></triplat-route>
+    <triplat-route name="people" path="/"></triplat-route>
     <triplat-route
       id="personRoute"
       name="person"
@@ -66,37 +72,37 @@
 
     <paper-header-panel class="flex">
       <paper-toolbar>
-        <div>People App</div>
-        <triplat-search-input value="{{filterValue}}"></triplat-search-input>
+        <div class="toolbar">
+          <div>People App</div>
+          <triplat-search-input value="{{filterValue}}"></triplat-search-input>
+        </div>
       </paper-toolbar>
 
       <div>
-        <div>
-          <triplat-route-selector>
-            <iron-pages>
-              <section route="people" default-route>
-                <iron-list id="ironList" items="{{people}}">
-                  <template>
-                    <div class="person">
-                      <paper-card>
-                        <div>{{item.firstName}}</div>
-                        <div class="flex">{{item.lastName}}</div>
-                        <paper-icon-button
-                          icon="face"
-                          on-tap="_onPersonTap"
-                        ></paper-icon-button>
-                      </paper-card>
-                    </div>
-                  </template>
-                </iron-list>
-              </section>
+        <triplat-route-selector>
+          <iron-pages>
+            <section route="people" default-route>
+              <iron-list id="ironList" items="{{people}}">
+                <template>
+                  <div class="person">
+                    <paper-card>
+                      <div>{{item.firstName}}</div>
+                      <div class="flex">{{item.lastName}}</div>
+                      <paper-icon-button
+                        icon="face"
+                        on-tap="_onPersonTap"
+                      ></paper-icon-button>
+                    </paper-card>
+                  </div>
+                </template>
+              </iron-list>
+            </section>
 
-              <section route="person">
-                <h1>Hello World</h1>
-              </section>
-            </iron-pages>
-          </triplat-route-selector>
-        </div>
+            <section route="person">
+              <h1>Hello</h1>
+            </section>
+          </iron-pages>
+        </triplat-route-selector>
       </div>
     </paper-header-panel>
   </template>
