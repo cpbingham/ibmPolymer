@@ -1,0 +1,50 @@
+<link rel="import" href="../triplat-view-behavior/triplat-view-behavior.html" />
+<link rel="import" href="../triplat-ds/triplat-ds.html" />
+
+<link rel="import" href="../iron-list/iron-list.html" />
+
+<link rel="import" href="../paper-material/paper-material.html" />
+<link rel="import" href="../paper-header-panel/paper-header-panel.html" />
+<link rel="import" href="../paper-toolbar/paper-toolbar.html" />
+<link rel="import" href="../paper-card/paper-card.html" />
+
+<dom-module id="cst-people">
+  <style>
+    :host {
+      @apply (--layout-flex);
+    }
+
+    :iron-list {
+      @apply (--layout-flex);
+    }
+  </style>
+  <template>
+    <triplat-ds name="people" data="{{people}}"> </triplat-ds>
+
+    <paper-header-panel class="flex">
+      <paper-toolbar>
+        <div>People App</div>
+      </paper-toolbar>
+
+      <div>
+        <div>
+          <iron-list items="{{people}}">
+            <template>
+              <paper-card>
+                <div>{{item.firstName}}</div>
+                <div>{{item.lastName}}</div>
+              </paper-card>
+            </template>
+          </iron-list>
+        </div>
+      </div>
+    </paper-header-panel>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "cst-people",
+
+    behaviors: [TriPlatViewBehavior]
+  });
+</script>
