@@ -1,0 +1,73 @@
+<link rel="import" href="../triplat-routing/triplat-routing.html" />
+<link rel="import" href="../triplat-ds/triplat-ds.html" />
+
+<link rel="import" href="../paper-card/paper-card.html" />
+<link rel="import" href="../paper-input/paper-input.html" />
+<link rel="import" href="../paper-button/paper-button.html" />
+<link rel="import" href="../paper-toast/paper-toast.html" />
+
+<dom-module id="cst-person">
+  <template>
+    <style>
+      :host {
+        @apply (--layout-fit);
+        @apply (--layout-scroll);
+        text-align: center;
+      }
+      .paper-card {
+        width: 300px;
+        padding: 25px;
+        margin: 15px;
+      }
+    </style>
+    <triplat-route name="person" params="{{params}}"></triplat-route>
+
+    <triplat-ds id="personDs" name="people" data="{{person}}">
+      <triplat-ds-instance
+        instance-id="{{params.personId}}"
+      ></triplat-ds-instance>
+    </triplat-ds>
+
+    <triplat-ds name="space" data="{{space}}">
+      <triplat-ds-context name="people" context-id="{{params.personId}}">
+      </triplat-ds-context>
+    </triplat-ds>
+
+    <triplat-ds name="floor" data="{{floor}}">
+      <triplat-ds-context name="people" context-id="{{params.personId}}">
+      </triplat-ds-context>
+    </triplat-ds>
+
+    <paper-card>
+      <paper-input
+        label="First Name"
+        value="{{person.firstName}}"
+      ></paper-input>
+      <paper-input label="Last Name" value="{{person.lastName}}"></paper-input>
+      <paper-input label="Title" value="{{person.title}}"></paper-input>
+      <paper-button on-tap="_onSaveTap">Save</paper-button>
+    </paper-card>
+
+    <paper-card>
+      <h1>Location</h1>
+      <h4>{{space.name}}</h4>
+      <h4>{{floor.name}}</h4>
+    </paper-card>
+
+    <paper-toast id="toast" text="Person Saved"></paper-toast>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "cst-person",
+
+    _onSaveTap: function() {
+      this.$.personDs
+        .updateRecord()
+        .then(function() {
+          this.$.toast.show();
+        })
+        .bind(this);
+    }
+  });
+</script>
