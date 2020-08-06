@@ -13,9 +13,23 @@
     :host {
       @apply (--layout-flex);
     }
-
     :iron-list {
       @apply (--layout-flex);
+    }
+    .person {
+      @apply (--layout-vertical);
+      @apply (--layout-center);
+    }
+    .person paper-card {
+      width: 300px;
+      padding: 25px;
+      margin: 15px;
+      @apply (--layout-horizontal);
+      @apply (--layout-center);
+    }
+
+    .person div {
+      padding-right: 5px;
     }
   </style>
   <template>
@@ -30,10 +44,12 @@
         <div>
           <iron-list items="{{people}}">
             <template>
-              <paper-card>
-                <div>{{item.firstName}}</div>
-                <div>{{item.lastName}}</div>
-              </paper-card>
+              <div class="person">
+                <paper-card>
+                  <div>{{item.firstName}}</div>
+                  <div>{{item.lastName}}</div>
+                </paper-card>
+              </div>
             </template>
           </iron-list>
         </div>
